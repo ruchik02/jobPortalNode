@@ -39,7 +39,9 @@ userSchema.pre("save", async function () {
 });
 // compare password
 userSchema.methods.comparePassword = async function (userPassword) {
+  console.log(userPassword,"42")
     const isMatch = await bcrypt.compare(userPassword, this.password);
+    console.log(isMatch, "44")
     return isMatch;
   };
 // JSON WEBTOKEN
