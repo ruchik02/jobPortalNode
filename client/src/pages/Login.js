@@ -19,22 +19,31 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      if (!email || !password) {
+       return toast.error("Please Provide All Fields");
+        // return alert("Please Provide All Fields");
+      }
       dispatch(showLoading());
       const { data } = await axios.post("/api/v1/auth/login", {
         email,
         password,
       });
+      console.log(data,data.success)
       if (data.success) {
+        console.log(data.success, "32")
         dispatch(hideLoading());
         localStorage.setItem("token", data.token);
-        alert("Login Successfully");
-        // toast.success("Login SUccessfully ");
+        // alert("Login Successfully");
+        toast.success("Login SUccessfully ");
         navigate("/dashboard");
+      } else {
+        dispatch(hideLoading());
+        alert("Invalid email or password. Please try again!");
       }
     } catch (error) {
       dispatch(hideLoading());
-      alert(error)
-      //   toast.error("Invalid Credintial please try again!");
+    //   alert(error);
+        toast.error("Invalid Credintial please try again!");
       console.log(error);
     }
   };

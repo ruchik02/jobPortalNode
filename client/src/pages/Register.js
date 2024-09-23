@@ -22,8 +22,8 @@ const Register = () => {
     e.preventDefault();
     try {
       if (!name || !lastName || !email || !password) {
-        // toast.error("Please Provide All Fields");
-        return alert("Please Provide All Fields");
+       return toast.error("Please Provide All Fields");
+        // return alert("Please Provide All Fields");
       }
       dispatch(showLoading());
       const { data } = await axios.post("/api/v1/auth/register", {
@@ -34,13 +34,13 @@ const Register = () => {
       });
       dispatch(hideLoading());
       if (data.success) {
-        alert("Register Successfully");
-        // toast.success("Register Successfully");
+        // alert("Register Successfully");
+        toast.success("Register Successfully");
         navigate("/login");
       }
     } catch (error) {
       dispatch(hideLoading());
-    //   toast.error("Invalid Form Details Please Try Agian!");
+      toast.error("Invalid Form Details Please Try Agian!");
       console.log(error);
     }
   };

@@ -75,8 +75,7 @@ export const loginController = async (req, res, next) => {
   const isMatch = await user.comparePassword(password);
   if (!isMatch) {
     console.log(isMatch, "78")
-   return next("Invalid username and password");
-    console.log("80")
+   return next({ message: "Invalid username and password", statusCode: 404 });
   }
   console.log("82")
   // user.password = undefined;
